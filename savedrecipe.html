@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Recipes</title>
+    <style>
+        /* Add some basic styling for better presentation */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .recipe {
+            border: 1px solid #3ee763;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Display saved recipes here -->
+<div id="savedRecipesContainer"></div>
+
+<script>
+    // Function to display saved recipes
+    function displaySavedRecipes() {
+        const savedRecipes = JSON.parse(localStorage.getItem('savedRecipes')) || [];
+
+        // Get the container element where recipes will be displayed
+        const savedRecipesContainer = document.getElementById('savedRecipesContainer');
+
+        // Clear the container before displaying the updated list
+        savedRecipesContainer.innerHTML = '';
+
+        // Iterate through saved recipes and create HTML elements for each
+        savedRecipes.forEach(recipe => {
+            const recipeElement = document.createElement('div');
+            recipeElement.classList.add('recipe');
+
+            // Create HTML structure for each recipe
+            recipeElement.innerHTML = `
+                <h2>${recipe.name}</h2>
+                <p>ID: ${recipe.id}</p>
+                <p>Category: ${recipe.category}</p>
+                <p>Instructions: ${recipe.instructions}</p>
+            `;
+
+            // Append the recipe element to the container
+            savedRecipesContainer.appendChild(recipeElement);
+        });
+    }
+
+    // Call the displaySavedRecipes function to initially display saved recipes
+    displaySavedRecipes();
+</script>
+
+</body>
+</html>
